@@ -2,106 +2,1071 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mehz Studio | Architecture & BIM Design Practice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mehz Studio is an architectural and BIM design practice based in Surat, working across India, Hong Kong and Australia.">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <!-- Google Font -->
+    <title>Mehz Studio · Architecture & Design</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ====================================
+           MEHZ STUDIO - COMPLETE STYLES
+           ==================================== */
+        
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-dark: #1a1a1a;
+            --color-darker: #0a0a0a;
+            --color-light: #faf9f7;
+            --color-cream: #f5f2eb;
+            --color-stone: #e8e4dd;
+            --color-clay: #9c7e6b;
+            --color-clay-light: #b99e8c;
+            --color-clay-dark: #7d6453;
+            --color-gray: #6b6b6b;
+            --color-gray-light: #d1d1d1;
+            
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow-md: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ====================================
+           NAVIGATION
+           ==================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 30px 0;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar.scrolled .nav-logo,
+        .navbar.scrolled .nav-link {
+            color: var(--color-dark);
+        }
+
+        .navbar.scrolled .nav-logo span {
+            color: var(--color-gray);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .nav-logo span {
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* ====================================
+           VIDEO HERO SECTION - FULL BACKGROUND
+           ==================================== */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Video background - full screen */
+        .hero-video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Dark overlay for text readability */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Hero content - positioned over video */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-supra {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero-title span {
+            font-weight: 500;
+            color: var(--color-clay-light);
+            display: block;
+            margin-top: 5px;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 48px;
+            background: white;
+            color: var(--color-dark);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid white;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            font-size: 13px;
+            color: white;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Scroll indicator */
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            z-index: 2;
+        }
+
+        .scroll-text {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        /* ====================================
+           REST OF THE SECTIONS
+           ==================================== */
+        .filter-section {
+            padding: 60px 0 30px;
+            background: var(--color-light);
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-clay);
+            font-weight: 400;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 30px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-gray);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding-bottom: 5px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--color-dark);
+            border-bottom-color: var(--color-clay);
+        }
+
+        .projects {
+            padding: 30px 0 100px;
+            background: var(--color-light);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-item {
+            transition: all 0.5s ease;
+        }
+
+        .project-item.hide {
+            display: none;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            margin-bottom: 20px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .project-link:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-location {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-clay);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .project-name {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--color-dark);
+            margin-bottom: 5px;
+        }
+
+        .project-type {
+            font-size: 14px;
+            color: var(--color-gray);
+        }
+
+        .stats {
+            padding: 80px 0;
+            background: var(--color-dark);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: var(--color-clay);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .about-preview {
+            padding: 120px 0;
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 1s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-supra {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-clay);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .about-title {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .about-text {
+            font-size: 16px;
+            color: var(--color-gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .about-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .skill-tag {
+            background: var(--color-cream);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: var(--color-dark);
+        }
+
+        .about-link {
+            color: var(--color-clay);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-clay);
+            padding-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .about-link:hover {
+            color: var(--color-clay-dark);
+            border-bottom-color: var(--color-clay-dark);
+        }
+
+        .contact-cta {
+            padding: 100px 0;
+            background: var(--color-cream);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--color-dark);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--color-dark);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--color-dark);
+        }
+
+        .footer {
+            background: var(--color-dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-address {
+            font-size: 15px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--color-clay);
+        }
+
+        .footer-email,
+        .footer-phone {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-email:hover,
+        .footer-phone:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        /* ====================================
+           RESPONSIVE DESIGN
+           ==================================== */
+        @media (max-width: 1000px) {
+            .hero-title {
+                font-size: 56px;
+            }
+            
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .hero-title span {
+                display: inline;
+            }
+            
+            .hero-text {
+                font-size: 16px;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--color-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease;
+                z-index: 99;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-toggle {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                cursor: pointer;
+                z-index: 100;
+            }
+            
+            .nav-toggle span {
+                width: 30px;
+                height: 2px;
+                background: white;
+                transition: all 0.3s ease;
+            }
+            
+            .navbar.scrolled .nav-toggle span {
+                background: var(--color-dark);
+            }
+            
+            .nav-link {
+                color: white !important;
+                font-size: 24px;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-title {
+                font-size: 32px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .hero-scroll {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">MEHZ STUDIO</div>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Architecture & BIM Design Practice</h1>
-            <p>Surat · Hong Kong · Australia</p>
-
-            <div class="hero-buttons">
-                <a href="projects.html" class="btn primary">View Selected Work</a>
-                <a href="services.html" class="btn secondary">BIM & Drafting Services</a>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">MEHZ<span>STUDIO</span></a>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Work</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
             </div>
         </div>
+    </nav>
 
-        <div class="scroll-indicator">Scroll</div>
-    </section>
-
-    <!-- Intro -->
-    <section class="intro">
+    <!-- ====================================
+        VIDEO HERO SECTION - FULL BACKGROUND
+        ==================================== -->
+    <section class="hero-section">
+        <!-- Video background (full screen) -->
+        <div class="hero-video-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="videos/hero-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <!-- Dark overlay for text readability -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Content container -->
         <div class="container">
-            <h2>Designing With Precision & Clarity</h2>
-            <p>
-                Mehz Studio is an independent architectural practice based in Surat, India,
-                working internationally across Hong Kong and Australia. The studio combines
-                thoughtful spatial design with technical precision in BIM modeling and
-                construction documentation.
-            </p>
+            <div class="hero-content">
+                <span class="hero-supra">Let's Build Something Great Together</span>
+                
+                <h1 class="hero-title">
+                    Architecture: <span>Crafted with Care</span>
+                </h1>
+                
+                <p class="hero-text">
+                    Hi, I'm Mehjabeen. I am an architect and designer with experience across Hong Kong luxury commercial, Australian residential, and Indian housing projects. Former Design Director at Creation Design & Contracting Limited, Hong Kong. Specializes in BIM documentation and complete construction drawing sets.
+                </p>
+                
+                <a href="contact.html" class="hero-cta">Let's Talk</a>
+                
+                <div class="feature-tag">
+                    ✦ 5+ Years Experience ✦ Hong Kong · Australia · India
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="hero-scroll">
+            <span class="scroll-text">Scroll to explore</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Featured Image -->
-    <section class="feature-image">
-        <img src="assets/images/hero.jpg" alt="Featured Project">
-        <div class="image-caption">
-            Residential Project · Australia
+    <!-- FILTER SECTION -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-header">
+                <h2 class="section-title">Selected projects</h2>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="hongkong">Hong Kong</button>
+                    <button class="filter-btn" data-filter="australia">Australia</button>
+                    <button class="filter-btn" data-filter="india">India</button>
+                    <button class="filter-btn" data-filter="bim">BIM</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="services-preview">
-        <div class="container services-grid">
-
-            <div class="service-item">
-                <h3>Architecture</h3>
-                <p>
-                    Residential planning, interior design and spatial development
-                    with a focus on clarity and proportion.
-                </p>
+    <!-- PROJECT GRID -->
+    <section class="projects">
+        <div class="container">
+            <div class="project-grid">
+                <!-- Hong Kong - Creation Design -->
+                <div class="project-item" data-category="hongkong">
+                    <a href="hongkong/creation-design.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/hongkong/creation-design.jpg" alt="Creation Design Hong Kong" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">Hong Kong · 2023-24</span>
+                        <h3 class="project-name">Creation Design</h3>
+                        <span class="project-type">Luxury Commercial</span>
+                    </a>
+                </div>
+                
+                <!-- Australia - Project Terra -->
+                <div class="project-item" data-category="australia">
+                    <a href="australia/project-terra.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/australia/project-terra.jpg" alt="Project Terra Australia" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">Australia · 2021</span>
+                        <h3 class="project-name">Project Terra</h3>
+                        <span class="project-type">International Residential</span>
+                    </a>
+                </div>
+                
+                <!-- India - Housing Project -->
+                <div class="project-item" data-category="india">
+                    <a href="india/housing-project.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/india/housing-project.jpg" alt="Housing Project India" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">India · 2021-22</span>
+                        <h3 class="project-name">Housing Project</h3>
+                        <span class="project-type">46 Duplex + 48 Flats</span>
+                    </a>
+                </div>
+                
+                <!-- BIM - Residential BIM -->
+                <div class="project-item" data-category="bim">
+                    <a href="bim/residential-bim.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/bim/residential-bim.jpg" alt="Residential BIM" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">Archicad · 2024</span>
+                        <h3 class="project-name">Residential BIM</h3>
+                        <span class="project-type">Construction Documentation</span>
+                    </a>
+                </div>
+                
+                <!-- India - School Project -->
+                <div class="project-item" data-category="india">
+                    <a href="india/school-project.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/india/school-project.jpg" alt="School Project India" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">India · 2021</span>
+                        <h3 class="project-name">School Project</h3>
+                        <span class="project-type">Institutional</span>
+                    </a>
+                </div>
+                
+                <!-- Hong Kong - Luxury Retail -->
+                <div class="project-item" data-category="hongkong">
+                    <a href="hongkong/luxury-retail.html" class="project-link">
+                        <div class="project-image">
+                            <img src="images/hongkong/luxury-retail.jpg" alt="Luxury Retail Hong Kong" onerror="this.style.backgroundColor='#e8e4dd'">
+                        </div>
+                        <span class="project-location">Hong Kong · 2023</span>
+                        <h3 class="project-name">Luxury Retail</h3>
+                        <span class="project-type">Interior Design</span>
+                    </a>
+                </div>
             </div>
-
-            <div class="service-item">
-                <h3>BIM Modeling</h3>
-                <p>
-                    Archicad-based coordinated BIM models including floor plans,
-                    elevations, sections and construction documentation.
-                </p>
-            </div>
-
-            <div class="service-item">
-                <h3>Remote Collaboration</h3>
-                <p>
-                    Supporting Australian residential projects with accurate
-                    drafting and documentation-ready drawings.
-                </p>
-            </div>
-
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-container">
-            <p>© 2026 Mehz Studio</p>
-            <p><a href="mailto:hello@mehzstudio.com">hello@mehzstudio.com</a></p>
+    <!-- STATS SECTION -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">94</div>
+                    <div class="stat-label">Housing Units</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Archicad</div>
+                    <div class="stat-label">BIM Specialist</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT PREVIEW -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/mehjabeen.png" alt="Mehjabeen Shaikh" onerror="this.style.backgroundColor='#f5f2eb'; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f5f2eb%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%22%20font-size%3D%2216%22%20fill%3D%22%239c7e6b%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%3EMehjabeen%20Shaikh%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                </div>
+                <div class="about-content">
+                    <span class="about-supra">Principal Architect</span>
+                    <h2 class="about-title">Mehjabeen Shaikh</h2>
+                    <p class="about-text">Architect and designer with experience across Hong Kong luxury commercial, Australian residential, and Indian housing projects. Former Design Director at Creation Design & Contracting Limited, Hong Kong. Specializes in BIM documentation (Archicad) and complete construction drawing sets. Diploma in Architecture Assistantship from Maharaja Sayajirao University, India.</p>
+                    
+                    <div class="about-skills">
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">SketchUp</span>
+                        <span class="skill-tag">Archicad</span>
+                        <span class="skill-tag">Escape</span>
+                        <span class="skill-tag">V-Ray</span>
+                        <span class="skill-tag">Photoshop</span>
+                    </div>
+                    
+                    <a href="about.html" class="about-link">More about Mehjabeen →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2 class="cta-title">Interested in collaborating?</h2>
+            <a href="contact.html" class="cta-button">Get in touch</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h4 class="footer-logo">MEHZ STUDIO</h4>
+                    <p class="footer-address">H-404, Suncity residency<br>Morabhalgal, Surat</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title">Contact</h4>
+                    <a href="mailto:smehjabeen68@gmail.com" class="footer-email">smehjabeen68@gmail.com</a>
+                    <a href="tel:+917486838460" class="footer-phone">+91 7486838460</a>
+                </div>
+                
+                <div class="footer-social">
+                    <h4 class="footer-title">Follow</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">LinkedIn</a>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">ArchDaily</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 Mehz Studio. All rights reserved.</p>
+                <p>Designed with precision</p>
+            </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. NAVBAR SCROLL EFFECT
+            const navbar = document.querySelector('.navbar');
+            
+            function updateNavbar() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', updateNavbar);
+            updateNavbar();
+            
+            // 2. MOBILE MENU TOGGLE
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    
+                    const spans = this.querySelectorAll('span');
+                    if (navMenu.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                        spans[1].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.transform = 'none';
+                    }
+                });
+                
+                navMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        const spans = navToggle.querySelectorAll('span');
+                        spans[0].style.transform = 'none';
+                        spans[1].style.transform = 'none';
+                    });
+                });
+            }
+            
+            // 3. PROJECT FILTER
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+            
+            if (filterButtons.length && projectItems.length) {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const filterValue = this.getAttribute('data-filter');
+                        
+                        projectItems.forEach(item => {
+                            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                                item.classList.remove('hide');
+                            } else {
+                                item.classList.add('hide');
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // 4. UPDATE COPYRIGHT YEAR
+            const yearElement = document.querySelector('.footer-bottom p:first-child');
+            if (yearElement) {
+                const currentYear = new Date().getFullYear();
+                yearElement.innerHTML = `© ${currentYear} Mehz Studio. All rights reserved.`;
+            }
+        });
+    </script>
 </body>
 </html>
